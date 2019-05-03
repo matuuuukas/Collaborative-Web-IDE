@@ -145,11 +145,7 @@ let copyLink = document.getElementById("copyLink");
 <!-- Aditional scripts -->
 <!-- Aditional scripts -->
 <!-- Aditional scripts -->
-<!-- Aditional scripts -->
-<!-- Aditional scripts -->
-<!-- Aditional scripts -->
-<!-- Aditional scripts -->
-<!-- Aditional scripts -->
+
 
 <script>  
 
@@ -207,13 +203,14 @@ function newColor () {
 }
     
 
-  //   function copyUrl(){
-  //     var copyUrl = window.location.href;
-  //     console.log(copyUrl);
-  //     copyUrl.select();
-  //     document.execCommand("copy");
-  //     alert("Link was copied: " + copyUrl);
-  // };
+    function copyUrl(){
+      var copyUrl = window.location.href;
+      console.log(copyUrl);
+      copyUrl.select();
+      document.execCommand("copy");
+      alert("Link was copied: " + copyUrl);
+      console.log('hello');
+  };
 
 
 </script> 
