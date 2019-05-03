@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+     <link rel="stylesheet" href="stylesheets/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+
+
+    <!-- <script>
+        $(document).ready(function(){
+            $("#buttons").click( function(){
+                var nameSpace = $("#mainInput").val();
+                    $.post(
+                        "server.js",
+                        {nameSpace : nameSpace},
+                        function(response){
+                            $("#mainInput").attr("value", response);
+                            console.log(response);
+                        }
+                    );
+            });
+        });
+    </script> -->
+</head>
+
+<body class="noselect" style="background: url(images/image1.svg); background-repeat: no-repeat; background-size:cover; height: 822px;">
+
+    <div class="container-fluid, blur">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="/login.html" data-toggle="modal" data-target="#myModal">Sign in</a>
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body" style="color:black;">
+
+                                <div class="modal-body mx-3">
+
+                                    <div style="text-align: center; margin-bottom: 30px;">
+                                        <h3 class="h1style" style="color:black;">Watch your latest code</h3>
+                                    </div>
+
+
+                                    <div class="md-form mb-5">
+
+                                        <input type="email" id="emailas" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                                    </div>
+
+                                    <div class="md-form mb-4">
+                                        <input type="password" id="passwordas" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                                    </div>
+                                    
+                                    <div class="md-form mb-5" style="text-align: center">
+                                        <a href="login.html"><button type="button" class="btn btn-outline-success">Log in</button></a>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal2">Sign up</a>
+                
+                <div id="myModal2" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body" style="color:black;">
+
+                                <div class="modal-body mx-3">
+
+                                    <div style="text-align: center; margin-bottom: 30px;">
+                                        <h3 class="h1style" style="color:black;">Create an account</h3>
+                                        <p> And save your project</p>
+                                        
+                                    </div>
+
+
+                                    <div class="md-form mb-5">
+
+                                        <input type="email" id="defaultForm-email" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                                    </div>
+
+                                    <div class="md-form mb-4">
+                                        <input type="password" id="defaultForm-pass" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                                    </div>
+                                    
+                                    <div class="md-form mb-5" style="text-align: center">
+                                        <button type="button" class="btn btn-outline-success">Sign up</button>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="row rowstyle">
+            <div class="col-sm">
+
+            </div>
+            <div class="col-sm h1style">
+                <h1 class="css-typing">Create or share your code real time</h1>
+                <div class="" style="padding-top: 25px;">
+                      <a href="/new" id="buttons" class="btn btn-outline-secondary, bg-danger" type="button" style="color:black;">Go!</a>
+                  </div>
+                <div style="padding: 30px; padding-bottom: 0px;">
+                    <!-- <img src="images/image2.svg" class="img-fluid gear" alt="Responsive image" style="width: 25%; height:auto;"> -->
+                </div>
+            </div>
+            <div class="col-sm">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    
+
+function redirectGo(){
+        var input = document.getElementById("mainInput").value;
+        console.log(input);        
+        location.href = "/share/" + input;
+    }
+
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+

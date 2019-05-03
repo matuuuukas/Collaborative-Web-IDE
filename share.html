@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>collab editing, yo</title>
+    <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/base16-dark.css">
+    <script src="http://codemirror.net/lib/codemirror.js"></script>
+    <script src="http://codemirror.net/addon/mode/overlay.js"></script>
+    <script src="http://codemirror.net/mode/xml/xml.js"></script>
+    <script src="http://codemirror.net/mode/markdown/markdown.js"></script>
+    <script src="http://codemirror.net/mode/gfm/gfm.js"></script>
+
+    <!-- Code block highlighting modes -->
+    <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+    <script src="http://codemirror.net/mode/css/css.js"></script>
+    <script src="http://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="http://codemirror.net/mode/clike/clike.js"></script>
+    <script src="http://codemirror.net/mode/clojure/clojure.js"></script>
+    <script src="http://codemirror.net/mode/ruby/ruby.js"></script>
+
+    <style type="text/css">
+      body
+      {
+        margin: 0;
+        padding: 0;
+        max-width:inherit;
+        height: 100%;
+      }
+      html, form, .CodeMirror, .CodeMirror-scroll
+      {
+        height: 100%;
+      }
+        
+        
+        ul li {
+            display: inline-block;
+            list-style:none;
+            
+        }
+        
+        a {
+            color:white;
+            text-decoration:none;
+            font-family: courier;
+        }
+
+    </style>
+
+  </head>
+  <body style="background-color:black;">
+
+  
+  <div class="">
+        <ul>
+            <li><button id="copyLink">Copy Link</button></li>
+            <li><button id="download">Download</button></li> 
+            <li><button id="random">Designer Tool</button></li>
+            <li><h1>color code: <span id="color"></span></h1></li>
+        </ul>
+  </div>
+<div id='admin' style="color: white;"></div>
+<textarea wrap="hard" id="textit" style="outline:none;" cols="10" wrap="hard"></textarea>
+
+<script>
+var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
+  mode: 'javascript',
+  lineNumbers: true,
+  theme: "base16-dark",
+  lineWrapping: true,
+  tabSize: 4,
+  readOnly: false
+});
+</script>
+
+<script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+
+<script>
+let linkUrl = window.location.href;
+let linkSplit = linkUrl.split("/");
+let roomId = linkSplit[4];
+let admin = false;
+let userId = Date.now();
+var socket = io.connect();
+let randomButton = document.getElementById("random");
+let copyLink = document.getElementById("copyLink");
+
+  function disableEditor(checkbox){
+        if (checkbox.checked){
+          // console.log('disableadfafafad');
+          socket.emit('disableEditor', {room : roomId});
+        } else if (!checkbox.checked){
+          // console.log('enabled');
+          socket.emit('enableEditor', {room : roomId});
+        }
+  };
+
+    socket.on('connect', function(){
+
+      socket.on('refresh', function (body_) {
+       editor.setValue(body_);
+      });
+
+      socket.emit('join', {"room" : roomId, "users" : socket.id});
+            
+      editor.on('change', function (i, op) {
+        socket.emit('change', {"content" : op});
+        socket.emit('refresh', editor.getValue());
+      });
+    
+      socket.on('change', function (data) {
+        editor.replaceRange(data.text, data.from, data.to);
+      });
+
+      socket.on('pushData', function (data) {
+        // console.log('user joined');
+        // console.log(data);
+        editor.setValue(data);
+      });
+
+      socket.on('users', function(data){
+        // console.log(data);
+        if (data.length === 1){
+          let adminHtml = '<input id="adminBox" onclick="disableEditor(this)" type="checkbox" name="onlyRead" value="OnlyRead" style="margin: 10px;"> Only Read<br>';
+          document.getElementById('admin').innerHTML = adminHtml;
+          // console.log(document.getElementById('adminBox'));
+          } 
+        });
+
+      socket.on('editorDisable', function(){
+        alert('editor is disabled for all users Only Read');
+        editor.options.readOnly = true; 
+      });
+
+      socket.on('editorEnable', function(){
+        alert('editor is enabled for all users');
+        editor.options.readOnly = false;
+      });
+    
+    });
+</script>
+
+
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+<!-- Aditional scripts -->
+
+<script>  
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+// Download a file
+document.getElementById("download").addEventListener("click", function(){
+
+    var text = editor.getValue();
+    var filename = "Code: " + new Date().getTime();+".txt";
+    
+    download(filename, text);
+}, false);
+    
+function newColor () {
+    
+    function getRandomColor(){
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    
+  }
+  return color;
+    }
+    
+}    
+
+
+    randomButton.addEventListener("click", function(){
+    var color = getRandomColor();
+    document.body.style.backgroundColor = color;
+    document.getElementById("color").innerHTML = color;
+    });
+    
+    function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+        
+  }
+  return color;
+}
+    
+
+  //   function copyUrl(){
+  //     var copyUrl = window.location.href;
+  //     console.log(copyUrl);
+  //     copyUrl.select();
+  //     document.execCommand("copy");
+  //     alert("Link was copied: " + copyUrl);
+  // };
+
+
+</script> 
+
+  </body>
+</html>

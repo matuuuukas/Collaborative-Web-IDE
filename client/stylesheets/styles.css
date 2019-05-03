@@ -1,0 +1,110 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background: url(img/image1.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.container-fluid {
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav {
+    background: #000;
+    color: white;
+}
+
+.nav-link {
+
+    color: white;
+
+}
+
+.rowstyle {
+    padding: 220px;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+
+.h1style {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.space {
+
+    padding-top: 25px;
+
+}
+
+
+.css-typing {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: type 2s steps(50, end);
+    animation: type 2s steps(50, end);
+
+}
+
+
+
+@keyframes type {
+    from {
+        width: 0;
+    }
+}
+
+@-webkit-keyframes type {
+    from {
+        width: 0;
+    }
+}
+
+.btn {
+
+    padding: .375rem 2.75rem;
+}
+
+.gear {
+    -webkit-animation: rotation 5s infinite linear;
+    -moz-animation: rotation 5s infinite linear;
+    -o-animation: rotation 5s infinite linear;
+    animation: rotation 5s infinite linear;
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
+@-moz-keyframes rotation {
+    from {-moz-transform: rotate(0deg);}
+    to   {-moz-transform: rotate(359deg);}
+}
+@-o-keyframes rotation {
+    from {-o-transform: rotate(0deg);}
+    to   {-o-transform: rotate(359deg);}
+}
+@keyframes rotation {
+    from {transform: rotate(0deg);}
+    to   {transform: rotate(359deg);}
+}
+
+
+
+.mb-5 {
+    margin-bottom: 1rem!important;
+}
+
+
+.modal-content {
+    background:#f2f3f9;
+}
