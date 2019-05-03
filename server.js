@@ -87,7 +87,7 @@ io.on('connection', function(socket){
     });
     
     socket.on('disableEditor', function(data){
-        // console.log('disable');
+        console.log('disable');
         socket.to(data.room).emit('editorDisable');
     });
 
